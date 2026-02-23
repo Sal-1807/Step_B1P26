@@ -1,6 +1,7 @@
 package Palindrome;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 public class PalindromeChecker {
 
@@ -12,22 +13,19 @@ public class PalindromeChecker {
         System.out.print("Enter a word: ");
         String word = scanner.nextLine();
 
-        char[] chars = word.toCharArray();
-        boolean isPalindrome = true;
+        Stack<Character> stack = new Stack<>();
 
-        int left = 0;
-        int right = chars.length - 1;
-
-        while (left < right) {
-            if (chars[left] != chars[right]) {
-                isPalindrome = false;
-                break;
-            }
-            left++;
-            right--;
+        for (char c : word.toCharArray()) {
+            stack.push(c);
         }
 
-        if (isPalindrome) {
+        String reversed = "";
+
+        while (!stack.isEmpty()) {
+            reversed += stack.pop();
+        }
+
+        if (word.equalsIgnoreCase(reversed)) {
             System.out.println("Palindrome");
         } else {
             System.out.println("Not Palindrome");
