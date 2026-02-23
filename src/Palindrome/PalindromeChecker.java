@@ -12,18 +12,16 @@ public class PalindromeChecker {
         System.out.print("Enter a word: ");
         String word = scanner.nextLine();
 
-        Stack<Character> stack = new Stack<>();
-        Queue<Character> queue = new LinkedList<>();
+        Deque<Character> deque = new ArrayDeque<>();
 
         for (char c : word.toCharArray()) {
-            stack.push(c);
-            queue.add(c);
+            deque.add(c);
         }
 
         boolean isPalindrome = true;
 
-        while (!stack.isEmpty()) {
-            if (!stack.pop().equals(queue.remove())) {
+        while (deque.size() > 1) {
+            if (!deque.removeFirst().equals(deque.removeLast())) {
                 isPalindrome = false;
                 break;
             }
