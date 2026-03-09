@@ -3,7 +3,7 @@ package Palindrome;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class PalindromeChecker {
+class PalindromeService{
 
     public static boolean isPalindrome(String str){
 
