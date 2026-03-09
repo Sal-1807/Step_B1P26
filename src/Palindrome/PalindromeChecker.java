@@ -1,13 +1,16 @@
 package Palindrome;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
-public class PalindromeChecker {
+class PalindromeService{
 
-    public static boolean iterative(String str){
+    public static boolean isPalindrome(String str){
+
+        str = str.replaceAll("\\s+","").toLowerCase();
 
         int left = 0;
-        int right = str.length()-1;
+        int right = str.length() - 1;
 
         while(left < right){
 
@@ -22,32 +25,18 @@ public class PalindromeChecker {
         return true;
     }
 
-    public static boolean recursive(String str,int left,int right){
-
-        if(left >= right) return true;
-
-        if(str.charAt(left) != str.charAt(right))
-            return false;
-
-        return recursive(str,left+1,right-1);
-    }
-
     public static void main(String[] args){
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter word: ");
+        System.out.print("Enter sentence: ");
         String input = sc.nextLine();
 
-        long start1 = System.nanoTime();
-        iterative(input);
-        long end1 = System.nanoTime();
-
-        long start2 = System.nanoTime();
-        recursive(input,0,input.length()-1);
-        long end2 = System.nanoTime();
-
-        System.out.println("Iterative Time: " + (end1-start1));
-        System.out.println("Recursive Time: " + (end2-start2));
+        if(isPalindrome(input)){
+            System.out.println("Palindrome");
+        }
+        else{
+            System.out.println("Not a Palindrome");
+        }
     }
 }
