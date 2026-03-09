@@ -5,31 +5,27 @@ import java.util.Scanner;
 
 public class PalindromeChecker {
 
-    public static boolean isPalindrome(String str) {
+    public static boolean isPalindrome(String str, int left, int right){
 
-        LinkedList<Character> list = new LinkedList<>();
-
-        for(char c : str.toCharArray()){
-            list.add(c);
+        if(left >= right){
+            return true;
         }
 
-        while(list.size() > 1){
-            if(list.removeFirst() != list.removeLast()){
-                return false;
-            }
+        if(str.charAt(left) != str.charAt(right)){
+            return false;
         }
 
-        return true;
+        return isPalindrome(str, left + 1, right - 1);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Enter a word: ");
         String input = sc.nextLine();
 
-        if(isPalindrome(input)){
+        if(isPalindrome(input,0,input.length()-1)){
             System.out.println("Palindrome");
         }
         else{
