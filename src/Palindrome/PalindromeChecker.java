@@ -1,38 +1,65 @@
 package Palindrome;
 
-import java.util.*;
+import java.util.Scanner;
+
+interface PalindromeStrategy{
+    boolean check(String str);
+}
+
+class IterativeStrategy implements PalindromeStrategy{
+
+    public boolean check(String str){
+
+        int left = 0;
+        int right = str.length()-1;
+
+        while(left < right){
+
+            if(str.charAt(left) != str.charAt(right)){
+                return false;
+            }
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+}
+
+class RecursiveStrategy implements PalindromeStrategy{
+
+    public boolean check(String str){
+        return checkRec(str,0,str.length()-1);
+    }
+
+    private boolean checkRec(String str,int left,int right){
+
+        if(left >= right) return true;
+
+        if(str.charAt(left) != str.charAt(right))
+            return false;
+
+        return checkRec(str,left+1,right-1);
+    }
+}
 
 public class PalindromeChecker {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
-        System.out.println("Welcome to Palindrome Checker App");
+        Scanner sc = new Scanner(System.in);
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a word: ");
-        String word = scanner.nextLine();
+        System.out.print("Enter word: ");
+        String input = sc.nextLine();
 
-        Deque<Character> deque = new ArrayDeque<>();
+        PalindromeStrategy strategy = new IterativeStrategy();
 
-        for (char c : word.toCharArray()) {
-            deque.add(c);
-        }
-
-        boolean isPalindrome = true;
-
-        while (deque.size() > 1) {
-            if (!deque.removeFirst().equals(deque.removeLast())) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        if (isPalindrome) {
+        if(strategy.check(input)){
             System.out.println("Palindrome");
-        } else {
+        }
+        else{
             System.out.println("Not Palindrome");
         }
-
-        scanner.close();
     }
 }
