@@ -1,17 +1,16 @@
 package Palindrome;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
-interface PalindromeStrategy{
-    boolean check(String str);
-}
+class PalindromeService{
 
-class IterativeStrategy implements PalindromeStrategy{
+    public static boolean isPalindrome(String str){
 
-    public boolean check(String str){
+        str = str.replaceAll("\\s+","").toLowerCase();
 
         int left = 0;
-        int right = str.length()-1;
+        int right = str.length() - 1;
 
         while(left < right){
 
@@ -25,41 +24,19 @@ class IterativeStrategy implements PalindromeStrategy{
 
         return true;
     }
-}
-
-class RecursiveStrategy implements PalindromeStrategy{
-
-    public boolean check(String str){
-        return checkRec(str,0,str.length()-1);
-    }
-
-    private boolean checkRec(String str,int left,int right){
-
-        if(left >= right) return true;
-
-        if(str.charAt(left) != str.charAt(right))
-            return false;
-
-        return checkRec(str,left+1,right-1);
-    }
-}
-
-public class PalindromeChecker {
 
     public static void main(String[] args){
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter word: ");
+        System.out.print("Enter sentence: ");
         String input = sc.nextLine();
 
-        PalindromeStrategy strategy = new IterativeStrategy();
-
-        if(strategy.check(input)){
+        if(isPalindrome(input)){
             System.out.println("Palindrome");
         }
         else{
-            System.out.println("Not Palindrome");
+            System.out.println("Not a Palindrome");
         }
     }
 }
