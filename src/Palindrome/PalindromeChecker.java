@@ -1,38 +1,53 @@
 package Palindrome;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class PalindromeChecker {
 
-    public static void main(String[] args) {
+    public static boolean iterative(String str){
 
-        System.out.println("Welcome to Palindrome Checker App");
+        int left = 0;
+        int right = str.length()-1;
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a word: ");
-        String word = scanner.nextLine();
+        while(left < right){
 
-        Deque<Character> deque = new ArrayDeque<>();
-
-        for (char c : word.toCharArray()) {
-            deque.add(c);
-        }
-
-        boolean isPalindrome = true;
-
-        while (deque.size() > 1) {
-            if (!deque.removeFirst().equals(deque.removeLast())) {
-                isPalindrome = false;
-                break;
+            if(str.charAt(left) != str.charAt(right)){
+                return false;
             }
+
+            left++;
+            right--;
         }
 
-        if (isPalindrome) {
-            System.out.println("Palindrome");
-        } else {
-            System.out.println("Not Palindrome");
-        }
+        return true;
+    }
 
-        scanner.close();
+    public static boolean recursive(String str,int left,int right){
+
+        if(left >= right) return true;
+
+        if(str.charAt(left) != str.charAt(right))
+            return false;
+
+        return recursive(str,left+1,right-1);
+    }
+
+    public static void main(String[] args){
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter word: ");
+        String input = sc.nextLine();
+
+        long start1 = System.nanoTime();
+        iterative(input);
+        long end1 = System.nanoTime();
+
+        long start2 = System.nanoTime();
+        recursive(input,0,input.length()-1);
+        long end2 = System.nanoTime();
+
+        System.out.println("Iterative Time: " + (end1-start1));
+        System.out.println("Recursive Time: " + (end2-start2));
     }
 }
