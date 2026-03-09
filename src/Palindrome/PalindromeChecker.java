@@ -1,13 +1,16 @@
 package Palindrome;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 class PalindromeService{
 
-    public boolean checkPalindrome(String str){
+    public static boolean isPalindrome(String str){
+
+        str = str.replaceAll("\\s+","").toLowerCase();
 
         int left = 0;
-        int right = str.length()-1;
+        int right = str.length() - 1;
 
         while(left < right){
 
@@ -21,19 +24,15 @@ class PalindromeService{
 
         return true;
     }
-}
-
-public class PalindromeChecker {
 
     public static void main(String[] args){
 
         Scanner sc = new Scanner(System.in);
-        PalindromeService service = new PalindromeService();
 
-        System.out.print("Enter a word: ");
+        System.out.print("Enter sentence: ");
         String input = sc.nextLine();
 
-        if(service.checkPalindrome(input)){
+        if(isPalindrome(input)){
             System.out.println("Palindrome");
         }
         else{
