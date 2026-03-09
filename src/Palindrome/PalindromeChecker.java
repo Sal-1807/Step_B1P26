@@ -1,42 +1,38 @@
 package Palindrome;
 
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
-class PalindromeService{
+public class PalindromeChecker {
 
-    public static boolean isPalindrome(String str){
+    public static void main(String[] args) {
 
-        str = str.replaceAll("\\s+","").toLowerCase();
+        System.out.println("Welcome to Palindrome Checker App");
 
-        int left = 0;
-        int right = str.length() - 1;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a word: ");
+        String word = scanner.nextLine();
 
-        while(left < right){
+        Deque<Character> deque = new ArrayDeque<>();
 
-            if(str.charAt(left) != str.charAt(right)){
-                return false;
+        for (char c : word.toCharArray()) {
+            deque.add(c);
+        }
+
+        boolean isPalindrome = true;
+
+        while (deque.size() > 1) {
+            if (!deque.removeFirst().equals(deque.removeLast())) {
+                isPalindrome = false;
+                break;
             }
-
-            left++;
-            right--;
         }
 
-        return true;
-    }
-
-    public static void main(String[] args){
-
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter sentence: ");
-        String input = sc.nextLine();
-
-        if(isPalindrome(input)){
+        if (isPalindrome) {
             System.out.println("Palindrome");
+        } else {
+            System.out.println("Not Palindrome");
         }
-        else{
-            System.out.println("Not a Palindrome");
-        }
+
+        scanner.close();
     }
 }
